@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="WinUI3DevTools.Pages.LoremIpsumPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI3DevTools.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LoremIpsumPageMainGrid"
+          Padding="36,24,36,0">
+        <TextBlock Text="Lorem Ipsum" Style="{ThemeResource TitleTextBlockStyle}"/>
+    </Grid>
+</Page>

@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="WinUI3DevTools.Pages.GUIDGeneratorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="GUIDHistoryListViewDataTemplate" x:DataType="x:String">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Bind}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center" />
+                <AppBarButton Icon="Delete"
+                              Label="Delete"
+                              Tag="{x:Bind}"
+                              Click="RemoveSingleHistoryButton_Click"
+                              Grid.Column="2"
+                              Margin="0,0,16,0" />
+                <AppBarButton Icon="Copy"
+                              Label="Copy"
+                              Tag="{x:Bind}"
+                              Click="CopySingleHistoryButton_Click"
+                              Grid.Column="1"
+                              Margin="0,0,16,0" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollMode="Disabled"
+                  HorizontalScrollBarVisibility="Auto">
+        <Grid x:Name="GUIDGeneratorPageMainGrid"
+              Padding="36,24,36,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="GUID Generator"
+                       Style="{ThemeResource TitleTextBlockStyle}" />
+            <TextBox x:Name="GUIDOutputTextBox"
+                     Header="GUID:"
+                     IsReadOnly="True"
+                     HorizontalAlignment="Left"
+                     Grid.Row="1"
+                     Margin="0,16,0,0" />
+            <Button x:Name="GenerateGUIDButton"
+                    Content="Generate GUID"
+                    Click="GenerateGUIDButton_Click"
+                    Grid.Row="2"
+                    Margin="0,16,0,0" />
+            <TextBlock Text="GUID Generation History"
+                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                       Grid.Row="3"
+                       Margin="0,16,0,0" />
+            <ListView x:Name="GUIDHistoryListView"
+                      ItemsSource="{x:Bind GUIDHistory}"
+                      ItemTemplate="{StaticResource GUIDHistoryListViewDataTemplate}"
+                      SelectionChanged="GUIDHistoryListView_SelectionChanged"
+                      Grid.Row="4"
+                      Margin="0,16,0,16" />
+        </Grid>
+    </ScrollViewer>
+</Page>

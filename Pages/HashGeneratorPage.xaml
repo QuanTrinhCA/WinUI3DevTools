@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="WinUI3DevTools.Pages.HashGeneratorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid x:Name="HashGeneratorPageMainGrid"
+              Padding="36,24,36,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Hash Generation and Validation" 
+                       Style="{ThemeResource TitleTextBlockStyle}" />
+            <TextBlock Text="Hash Generation" 
+                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                       Grid.Row="1"
+                       Margin="0,16,16,16" />
+            <Expander x:Name="HashGenerationExpander"
+                      Header="Generator"
+                      Expanding="HashGenerationExpander_Expanding"
+                      Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <RadioButtons x:Name="InputSelectionRadioButtons"
+                                  Header="Input:"
+                                  SelectedIndex="0"
+                                  MaxColumns="2"
+                                  Grid.ColumnSpan="2"
+                                  Margin="0,0,16,0">
+                        <RadioButton Content="Text"
+                                     Tag="Text"
+                                     Checked="RadioButton_Checked" />
+                        <RadioButton Content="File"
+                                     Tag="File"
+                                     Checked="RadioButton_Checked" />
+                    </RadioButtons>
+                    <TextBox x:Name="InputTextBox"
+                             IsEnabled="{x:Bind TextInputIsEnabled.Value, Mode=OneWay}"
+                             Visibility="{x:Bind TextInputIsEnabled.Value, Mode=OneWay}"
+                             TextChanged="InputTextBox_TextChanged"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="2"
+                             Margin="0,16,0,0" />
+                    <Button x:Name="InputFileSelectionButton"
+                            Content="File"
+                            IsEnabled="{x:Bind FileInputIsEnabled.Value, Mode=OneWay}"
+                            Visibility="{x:Bind FileInputIsEnabled.Value, Mode=OneWay}"
+                            Click="InputFileSelectionButton_Click"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            Margin="0,16,0,0" />
+                    <Button x:Name="GenerateHASHButton"
+                            Content="Generate Hash"
+                            Click="GenerateHASHButton_Click"
+                            IsEnabled="{x:Bind GenerateButtonIsEnabled.Value, Mode=OneWay}"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            Margin="0,16,0,0" />
+                    <ComboBox x:Name="SelectHASHComboBox"
+                              SelectedIndex="0"
+                              Grid.Row="2"
+                              Grid.Column="1"
+                              HorizontalAlignment="Center"
+                              Margin="0,16,0,0">
+                        <x:String>MD5</x:String>
+                        <x:String>SHA1</x:String>
+                        <x:String>SHA256</x:String>
+                        <x:String>SHA384</x:String>
+                        <x:String>SHA512</x:String>
+                    </ComboBox>
+                    <TextBox x:Name="OutputTextBox"
+                             Header="Output:"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             Grid.Row="3"
+                             Grid.ColumnSpan="2"
+                             Margin="0,16,0,0" />
+                </Grid>
+            </Expander>
+        </Grid>
+    </ScrollViewer>
+</Page>

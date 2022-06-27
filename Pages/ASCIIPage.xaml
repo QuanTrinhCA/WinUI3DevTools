@@ -1,0 +1,242 @@
+﻿<Page
+    x:Class="WinUI3DevTools.Pages.ASCIIPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:wctp="using:CommunityToolkit.WinUI.UI.Controls.Primitives"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="DataGridColumnHeaderStyle"
+               TargetType="wctp:DataGridColumnHeader">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="wctp:DataGridColumnHeader">
+                        <Grid Background="{StaticResource SystemControlBackgroundChromeMediumBrush}">
+                            <TextBlock Text="{x:Bind Content}"
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       Foreground="{StaticResource ApplicationForegroundThemeBrush}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Padding="12,0,12,0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridCellStyle"
+               TargetType="wct:DataGridCell">
+            <Setter Property="Template"
+                    Value="{x:Null}" />
+        </Style>
+        <DataTemplate x:Key="BinaryDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding Binary}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CharacterDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding Character}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="DecimalDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding Decimal}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="DescriptionDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding Description}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="HexDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding Hex}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="HTMLDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding HTML}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="HTMLNameDataGridCellDataTemplate">
+            <Border BorderThickness="1"
+                    BorderBrush="Gray">
+                <TextBlock Text="{Binding HTMLName}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="12,0,12,0" />
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid x:Name="ASCIIPageMainGrid"
+              Padding="36,24,36,0"
+              Loaded="ASCIIPageMainGrid_Loaded">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="ASCII"
+                       Style="{ThemeResource TitleTextBlockStyle}" />
+            <wct:WrapPanel Orientation="Horizontal"
+                           Grid.Row="1"
+                           HorizontalAlignment="Stretch">
+                <TextBox Header="Char:"
+                         HorizontalAlignment="Stretch"
+                         Margin="16,16,16,16" />
+                <TextBox Header="Decimal:"
+                         HorizontalAlignment="Stretch"
+                         Margin="16,16,16,16" />
+                <TextBox Header="Hex:"
+                         HorizontalAlignment="Stretch"
+                         Margin="16,16,16,16" />
+                <TextBox Header="Binary:"
+                         HorizontalAlignment="Stretch"
+                         Margin="16,16,16,16" />
+                <TextBox Header="HTML:"
+                         HorizontalAlignment="Stretch"
+                         Margin="16,16,16,16" />
+                <TextBox Header="Escape:"
+                         HorizontalAlignment="Stretch"
+                         Margin="16,16,16,16" />
+            </wct:WrapPanel>
+            <Expander x:Name="ControlASCIIExpander"
+                      Grid.Row="2"
+                      HorizontalAlignment="Left"
+                      HorizontalContentAlignment="Center"
+                      Width="{x:Bind ExpanderSize.Width, Mode=OneWay}"
+                      Expanding="Expander_Expanding"
+                      Collapsed="Expander_Collapsed"
+                      Header="Control ASCII">
+                <wct:DataGrid x:Name="ControlASCIIDataGrid"
+                              ItemsSource="{x:Bind ControlASCIITable}"
+                              SelectionChanged="ControlASCIIDataGrid_SelectionChanged"
+                              IsReadOnly="True"
+                              CanUserSortColumns="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
+                              ClipboardCopyMode="None"
+                              AutoGenerateColumns="False">
+                    <wct:DataGrid.Columns>
+                        <wct:DataGridTemplateColumn Header="Decimal"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource DecimalDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Hex"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource HexDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Binary"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource BinaryDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="HTML"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource HTMLDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="HTML Name"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource HTMLNameDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Description"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource DescriptionDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Character"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource CharacterDataGridCellDataTemplate}" />
+                    </wct:DataGrid.Columns>
+                </wct:DataGrid>
+            </Expander>
+            <Expander x:Name="TextASCIIExpander"
+                      Grid.Row="3"
+                      HorizontalAlignment="Left"
+                      HorizontalContentAlignment="Center"
+                      Width="{x:Bind ExpanderSize.Width, Mode=OneWay}"
+                      Expanding="Expander_Expanding"
+                      Collapsed="Expander_Collapsed"
+                      Header="Text ASCII">
+                <wct:DataGrid x:Name="TextASCIIDataGrid"
+                              ItemsSource="{x:Bind ControlASCIITable}"
+                              SelectionChanged="ControlASCIIDataGrid_SelectionChanged"
+                              IsReadOnly="True"
+                              CanUserSortColumns="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
+                              ClipboardCopyMode="None"
+                              AutoGenerateColumns="False">
+                    <wct:DataGrid.Columns>
+                        <wct:DataGridTemplateColumn Header="Decimal"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource DecimalDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Hex"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource HexDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Binary"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource BinaryDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="HTML"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource HTMLDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="HTML Name"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource HTMLNameDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Description"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource DescriptionDataGridCellDataTemplate}" />
+                        <wct:DataGridTemplateColumn Header="Character"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                                    CellStyle="{StaticResource DataGridCellStyle}"
+                                                    CellTemplate="{StaticResource CharacterDataGridCellDataTemplate}" />
+                    </wct:DataGrid.Columns>
+                </wct:DataGrid>
+            </Expander>
+        </Grid>
+    </ScrollViewer>
+</Page>
