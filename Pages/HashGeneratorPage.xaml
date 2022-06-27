@@ -76,6 +76,7 @@
                             Margin="0,16,0,0" />
                     <ComboBox x:Name="SelectHASHComboBox"
                               SelectedIndex="0"
+                              SelectionChanged="SelectHASHComboBox_SelectionChanged"
                               Grid.Row="2"
                               Grid.Column="1"
                               HorizontalAlignment="Center"

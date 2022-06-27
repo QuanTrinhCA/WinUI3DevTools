@@ -176,5 +176,15 @@ namespace WinUI3DevTools.Pages
                     break;
             }
         }
+
+        /// <summary>
+        /// Enable generation button on HASH type change.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
+        private void SelectHASHComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GenerateButtonIsEnabled.Value = true;
+        }
     }
 }
