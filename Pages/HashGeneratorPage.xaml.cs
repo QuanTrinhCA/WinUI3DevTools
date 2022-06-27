@@ -86,6 +86,7 @@ namespace WinUI3DevTools.Pages
                 stringBuilder.Append(outputByte.ToString("x2"));
             }
             OutputTextBox.Text = stringBuilder.ToString();
+            GC.Collect();
         }
 
         /// <summary>
