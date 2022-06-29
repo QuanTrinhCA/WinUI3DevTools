@@ -18,10 +18,10 @@
     <None Remove="Pages\GUIDGeneratorPage.xaml" />
     <None Remove="Pages\HashGeneratorPage.xaml" />
     <None Remove="Pages\IconsPage.xaml" />
-    <None Remove="Pages\LoremIpsumPage.xaml" />
     <None Remove="Pages\PingPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\StringPage.xaml" />
+    <None Remove="Pages\TextGeneratorPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +38,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
+    <PackageReference Include="RandomDataGenerator.Net" Version="1.0.15" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
@@ -48,7 +49,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\LoremIpsumPage.xaml">
+    <Page Update="Pages\TextGeneratorPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -23,7 +23,7 @@
             </NavigationViewItem>
             <NavigationViewItem Icon="Permissions" Content="Hash Generator" Tag="HashGeneratorPage"/>
             <NavigationViewItem Icon="BrowsePhotos" Content="Icons" Tag="IconsPage"/>
-            <NavigationViewItem Content="Lorem Ipsum" Tag="LoremIpsumPage">
+            <NavigationViewItem Content="Text Generator" Tag="TextGeneratorPage">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE82D;"/>
                 </NavigationViewItem.Icon>

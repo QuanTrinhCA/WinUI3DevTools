@@ -1,0 +1,106 @@
+﻿<Page
+    x:Class="WinUI3DevTools.Pages.TextGeneratorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI3DevTools.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <Page.Resources>
+        <DataTemplate x:Key="TextHistoryDataTemplate" x:DataType="x:String">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Bind}"
+                           IsTextSelectionEnabled="True"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center" />
+                <AppBarButton Icon="Delete"
+                              Label="Delete"
+                              Tag="{x:Bind}"
+                              Grid.Column="2"
+                              Margin="0,0,16,0" />
+                <AppBarButton Icon="Copy"
+                              Label="Copy"
+                              Tag="{x:Bind}"
+                              Grid.Column="1"
+                              Margin="0,0,16,0" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Grid x:Name="TextGeneratorPageMainGrid"
+              Padding="36,24,36,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Text Generator" Style="{ThemeResource TitleTextBlockStyle}" Grid.ColumnSpan="3"/>
+            <ComboBox x:Name="TextTypeSelectionComboBox" Header="Type:"  SelectedIndex="0" SelectionChanged="TextTypeSelectionComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Margin="0,16,16,0">
+                <x:String>Lorum Ipsum</x:String>
+                <x:String>Naughty Strings</x:String>
+                <x:String>Text Regex</x:String>
+                <x:String>Words</x:String>
+            </ComboBox>
+            <Button x:Name="GenerateButton" Content="Generate" Click="GenerateButton_Click" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,16,16,0"/>
+            <Grid x:Name="LipsumOptionsGrid" Visibility="{x:Bind LipsumOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <NumberBox x:Name="LipsumParagraphsNumberBox" Header="Paragraphs:" Value="1" Maximum="100" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Margin="0,0,16,0"/>
+                <NumberBox x:Name="LipsumSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+            </Grid>
+            <Grid x:Name="NaughtyStringsOptionsGrid" Visibility="{x:Bind NaughtyStringsOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Header="Categories:" Margin="0,0,16,0"/>
+                <NumberBox Header="Seed:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+            </Grid>
+            <Grid x:Name="RegexOptionsGrid" Visibility="{x:Bind RegexOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Header="Pattern:" Margin="0,0,16,0"/>
+                <NumberBox Header="Seed:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+            </Grid>
+            <Grid x:Name="WordsOptionsGrid" Visibility="{x:Bind WordsOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <NumberBox Header="Min:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Margin="0,0,16,0"/>
+                <NumberBox Header="Max:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+                <NumberBox Header="Seed:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="2" Margin="0,0,16,0"/>
+            </Grid>
+            <TextBox x:Name="OuputTextBox" Header="Output:" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,16,0,0"/>
+            <TextBlock Text="Text Generation History"
+                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                       Grid.Row="4"
+                       Grid.ColumnSpan="3"
+                       Margin="0,16,0,0" />
+            <ListView x:Name="TextHistoryListView"
+                      ItemTemplate="{StaticResource TextHistoryDataTemplate}"
+                      Grid.Row="5"
+                      Grid.ColumnSpan="3"
+                      Margin="0,16,0,16" />
+        </Grid>
+    </ScrollViewer>
+</Page>
