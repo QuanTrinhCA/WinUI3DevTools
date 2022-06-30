@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using RandomDataGenerator.FieldOptions;
+using RandomDataGenerator.Randomizers;
 using System;
 using System.Threading.Tasks;
 using Windows.Globalization.NumberFormatting;
@@ -37,22 +38,36 @@ namespace WinUI3DevTools.Pages
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Generates selected text types on GenerateButton click.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
         private async void GenerateButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             switch (TextTypeSelectionComboBox.SelectedItem.ToString())
             {
                 case "Lorum Ipsum":
-                    if (LipsumParagraphsNumberBox.Value == 0 || double.IsNaN(LipsumParagraphsNumberBox.Value))
+                    if (
+                        LipsumParagraphsNumberBox.Value == 0
+                        || double.IsNaN(LipsumParagraphsNumberBox.Value)
+                    )
                     {
                         LipsumParagraphsNumberBox.Value = 1;
                     }
                     OuputTextBox.Text = await GenerateLipsumAsync(
                         (int)LipsumParagraphsNumberBox.Value,
-                        ((int)LipsumSeedNumberBox.Value)
+                        (int)LipsumSeedNumberBox.Value
                     );
                     break;
 
                 case "Naughty Strings":
+                    OuputTextBox.Text = await GenerateNaughtyStringsAsync(
+                        (
+                            NaughtyStringsCategoriesComboBox.SelectedItem as ComboBoxItem
+                        ).Tag.ToString(),
+                        (int)NaughtyStringsSeedNumberBox.Value
+                    );
                     break;
 
                 case "Text Regex":
@@ -88,14 +103,52 @@ namespace WinUI3DevTools.Pages
                 var generator = RandomDataGenerator.Randomizers.RandomizerFactory.GetRandomizer(
                     lipsumFieldOptions
                 );
-                var outputString = generator.Generate().Replace(Environment.NewLine, $"{Environment.NewLine}{Environment.NewLine}");
-                outputString = outputString.Insert(0, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
+                var outputString = generator
+                    .Generate()
+                    .Replace(Environment.NewLine, $"{Environment.NewLine}{Environment.NewLine}");
+                outputString = outputString.Insert(
+                    0,
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                );
                 return outputString;
             });
         }
 
+        /// <summary>
+        /// Generates the naughty strings asynchronously.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="seed">The seed.</param>
+        /// <returns><![CDATA[Task<string>]]></returns>
+        private async Task<string> GenerateNaughtyStringsAsync(string category, int seed)
+        {
+            return await Task.Run(() =>
+            {
+                FieldOptionsTextNaughtyStrings lipsumFieldOptions;
+                if (seed < -2147483647 || seed > 2147483647)
+                {
+                    lipsumFieldOptions = new FieldOptionsTextNaughtyStrings
+                    {
+                        ValueAsString = true,
+                        Categories = category
+                    };
+                }
+                else
+                {
+                    lipsumFieldOptions = new FieldOptionsTextNaughtyStrings
+                    {
+                        ValueAsString = true,
+                        Categories = category,
+                        Seed = seed
+                    };
+                }
+                var generator = RandomizerFactory.GetRandomizer(lipsumFieldOptions);
+                return generator.Generate();
+            });
+        }
+
         private void TextTypeSelectionComboBox_SelectionChanged(
-                            object sender,
+            object sender,
             SelectionChangedEventArgs e
         )
         {

@@ -69,8 +69,41 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Header="Categories:" Margin="0,0,16,0"/>
-                <NumberBox Header="Seed:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+                <ComboBox x:Name="NaughtyStringsCategoriesComboBox" Header="Categories:" SelectedIndex="0" Margin="0,0,16,0">
+                    <ComboBoxItem Content="All" Tag="All"/>
+                    <ComboBoxItem Content="Changing length when lowercased" Tag="Changinglengthwhenlowercased"/>
+                    <ComboBoxItem Content="Command Injection Ruby" Tag="CommandInjectionRuby"/>
+                    <ComboBoxItem Content="Emoji" Tag="Emoji"/>
+                    <ComboBoxItem Content="File Inclusion" Tag="FileInclusion"/>
+                    <ComboBoxItem Content="Human Injection" Tag="Humaninjection"/>
+                    <ComboBoxItem Content="Japanese Emoticons" Tag="JapaneseEmoticons"/>
+                    <ComboBoxItem Content="Known CVEs and Vulnerabilities" Tag="KnownCVEsandVulnerabilities"/>
+                    <ComboBoxItem Content="MS-DOS and Windows Special Filenames" Tag="MSDOSWindowsSpecialFilenames"/>
+                    <ComboBoxItem Content="Numeric Strings" Tag="NumericStrings"/>
+                    <ComboBoxItem Content="Ogham Text" Tag="OghamText"/>
+                    <ComboBoxItem Content="Quotation Marks" Tag="QuotationMarks"/>
+                    <ComboBoxItem Content="Reserved Strings" Tag="ReservedStrings"/>
+                    <ComboBoxItem Content="Right to Left Strings" Tag="RightToLeftStrings"/>
+                    <ComboBoxItem Content="SQL Injection" Tag="SQLInjection"/>
+                    <ComboBoxItem Content="Script Injection" Tag="ScriptInjection"/>
+                    <ComboBoxItem Content="Scunthorpe Problem" Tag="ScunthorpeProblem"/>
+                    <ComboBoxItem Content="Server Code Injection" Tag="ServerCodeInjection"/>
+                    <ComboBoxItem Content="Special Characters" Tag="SpecialCharacters"/>
+                    <ComboBoxItem Content="Special Unicode Characters Union" Tag="SpecialUnicodeCharactersUnion"/>
+                    <ComboBoxItem Content="Strings which contain two byte letters" Tag="Stringswhichcontaintwobyteletters"/>
+                    <ComboBoxItem Content="Terminal Escape Codes" Tag="Terminalescapecodes"/>
+                    <ComboBoxItem Content="Trick Unicode" Tag="TrickUnicode"/>
+                    <ComboBoxItem Content="Two Byte Characters" Tag="TwoByteCharacters"/>
+                    <ComboBoxItem Content="Unicode Numbers" Tag="UnicodeNumbers"/>
+                    <ComboBoxItem Content="Unicode Subscript, Superscript and Accents" Tag="UnicodeSubscriptSuperscriptAccents"/>
+                    <ComboBoxItem Content="Unicode Symbols" Tag="UnicodeSymbols"/>
+                    <ComboBoxItem Content="Unicode Upsidedown" Tag="UnicodeUpsidedown"/>
+                    <ComboBoxItem Content="Unicode Font" Tag="Unicodefont"/>
+                    <ComboBoxItem Content="Unwanted Interpolation" Tag="UnwantedInterpolation"/>
+                    <ComboBoxItem Content="Zalgo Text" Tag="ZalgoText"/>
+                    <ComboBoxItem Content="iOS Vulnerabilities" Tag="iOSVulnerabilities"/>
+                </ComboBox>
+                <NumberBox x:Name="NaughtyStringsSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647"  NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
             </Grid>
             <Grid x:Name="RegexOptionsGrid" Visibility="{x:Bind RegexOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,16,0,0">
                 <Grid.ColumnDefinitions>
