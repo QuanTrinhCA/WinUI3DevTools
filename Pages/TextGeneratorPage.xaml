@@ -110,8 +110,8 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Header="Pattern:" Margin="0,0,16,0"/>
-                <NumberBox Header="Seed:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+                <TextBox x:Name="RegexPatternTextBox" Header="Regex Pattern:" Margin="0,0,16,0"/>
+                <NumberBox x:Name="RegexSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
             </Grid>
             <Grid x:Name="WordsOptionsGrid" Visibility="{x:Bind WordsOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,16,0,0">
                 <Grid.ColumnDefinitions>
@@ -121,7 +121,7 @@
                 </Grid.ColumnDefinitions>
                 <NumberBox Header="Min:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Margin="0,0,16,0"/>
                 <NumberBox Header="Max:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
-                <NumberBox Header="Seed:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="2" Margin="0,0,16,0"/>
+                <NumberBox Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="2" Margin="0,0,16,0"/>
             </Grid>
             <TextBox x:Name="OuputTextBox" Header="Output:" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,16,0,0"/>
             <TextBlock Text="Text Generation History"

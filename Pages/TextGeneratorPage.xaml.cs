@@ -71,6 +71,14 @@ namespace WinUI3DevTools.Pages
                     break;
 
                 case "Text Regex":
+                    if (RegexPatternTextBox.Text == null || RegexPatternTextBox.Text == "")
+                    {
+                        break;
+                    }
+                    OuputTextBox.Text = await GenerateRegexTextAsync(
+                        RegexPatternTextBox.Text,
+                        (int)RegexSeedNumberBox.Value
+                    );
                     break;
 
                 case "Words":
@@ -144,6 +152,38 @@ namespace WinUI3DevTools.Pages
                 }
                 var generator = RandomizerFactory.GetRandomizer(lipsumFieldOptions);
                 return generator.Generate();
+            });
+        }
+
+        /// <summary>
+        /// Generates text with regex asynchronously.
+        /// </summary>
+        /// <param name="pattern">The pattern.</param>
+        /// <param name="seed">The seed.</param>
+        /// <returns><![CDATA[Task<string>]]></returns>
+        private async Task<string> GenerateRegexTextAsync(string pattern, int seed)
+        {
+            return await Task.Run(() =>
+            {
+                FieldOptionsTextRegex lipsumFieldOptions;
+                if (seed < -2147483647 || seed > 2147483647)
+                {
+                    lipsumFieldOptions = new FieldOptionsTextRegex
+                    {
+                        ValueAsString = true,
+                        Pattern = pattern
+                    };
+                }
+                else
+                {
+                    lipsumFieldOptions = new FieldOptionsTextRegex
+                    {
+                        ValueAsString = true,
+                        Pattern = pattern,
+                        Seed = seed
+                    };
+                }
+                return RandomizerFactory.GetRandomizer(lipsumFieldOptions).Generate();
             });
         }
 
