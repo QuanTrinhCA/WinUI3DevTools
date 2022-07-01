@@ -3,6 +3,7 @@ using RandomDataGenerator.FieldOptions;
 using RandomDataGenerator.Randomizers;
 using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Globalization.NumberFormatting;
 using WinUI3DevTools.Models;
 
@@ -31,11 +32,34 @@ namespace WinUI3DevTools.Pages
         public ObservableBoolean LipsumOptionsGridIsVisible = new();
         public ObservableBoolean NaughtyStringsOptionsGridIsVisible = new();
         public ObservableBoolean RegexOptionsGridIsVisible = new();
+        public ObservableBoolean TextFunctionsIsEnabled = new() { Value = false };
         public ObservableBoolean WordsOptionsGridIsVisible = new();
 
         public TextGeneratorPage()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Clears the output textbox on clear button click.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
+        private void ClearAppBarButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            OuputTextBox.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Copies the output to clipboard on copy button click.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
+        private void CopyAppBarButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            DataPackage dataPackage = new() { RequestedOperation = DataPackageOperation.Copy };
+            dataPackage.SetText(OuputTextBox.Text);
+            Clipboard.SetContent(dataPackage);
         }
 
         /// <summary>
@@ -236,6 +260,23 @@ namespace WinUI3DevTools.Pages
                 }
                 return RandomizerFactory.GetRandomizer(lipsumFieldOptions).Generate();
             });
+        }
+
+        /// <summary>
+        /// Disables or enables the copy button depending on the output text box on change.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
+        private void OuputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace((sender as TextBox).Text))
+            {
+                TextFunctionsIsEnabled.Value = false;
+            }
+            else
+            {
+                TextFunctionsIsEnabled.Value = true;
+            }
         }
 
         private void TextTypeSelectionComboBox_SelectionChanged(
