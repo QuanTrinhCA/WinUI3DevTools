@@ -29,11 +29,7 @@ namespace WinUI3DevTools.Pages
                 }
             };
 
-        public ObservableBoolean LipsumOptionsGridIsVisible = new();
-        public ObservableBoolean NaughtyStringsOptionsGridIsVisible = new();
-        public ObservableBoolean RegexOptionsGridIsVisible = new();
         public ObservableBoolean TextFunctionsIsEnabled = new() { Value = false };
-        public ObservableBoolean WordsOptionsGridIsVisible = new();
 
         public TextGeneratorPage()
         {
@@ -292,31 +288,31 @@ namespace WinUI3DevTools.Pages
             switch (textType)
             {
                 case "Lorum Ipsum":
-                    LipsumOptionsGridIsVisible.Value = true;
-                    NaughtyStringsOptionsGridIsVisible.Value = false;
-                    RegexOptionsGridIsVisible.Value = false;
-                    WordsOptionsGridIsVisible.Value = false;
+                    LipsumOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    NaughtyStringsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    RegexOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    WordsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     break;
 
                 case "Naughty Strings":
-                    LipsumOptionsGridIsVisible.Value = false;
-                    NaughtyStringsOptionsGridIsVisible.Value = true;
-                    RegexOptionsGridIsVisible.Value = false;
-                    WordsOptionsGridIsVisible.Value = false;
+                    LipsumOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    NaughtyStringsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    RegexOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    WordsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     break;
 
                 case "Text Regex":
-                    LipsumOptionsGridIsVisible.Value = false;
-                    NaughtyStringsOptionsGridIsVisible.Value = false;
-                    RegexOptionsGridIsVisible.Value = true;
-                    WordsOptionsGridIsVisible.Value = false;
+                    LipsumOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    NaughtyStringsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    RegexOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    WordsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     break;
 
                 case "Words":
-                    LipsumOptionsGridIsVisible.Value = false;
-                    NaughtyStringsOptionsGridIsVisible.Value = false;
-                    RegexOptionsGridIsVisible.Value = false;
-                    WordsOptionsGridIsVisible.Value = true;
+                    LipsumOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    NaughtyStringsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    RegexOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    WordsOptionsGrid.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
                     break;
             }
         }
