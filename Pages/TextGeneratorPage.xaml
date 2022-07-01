@@ -31,7 +31,7 @@
                 <x:String>Words</x:String>
             </ComboBox>
             <Button x:Name="GenerateButton" Content="Generate" Click="GenerateButton_Click" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,16,16,0" />
-            <Grid x:Name="LipsumOptionsGrid" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
+            <Grid x:Name="LipsumOptionsGrid" Visibility="{x:Bind LipsumOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -39,7 +39,7 @@
                 <NumberBox x:Name="LipsumParagraphsNumberBox" Header="Paragraphs:" Value="1" Maximum="100" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Margin="0,0,16,0" />
                 <NumberBox x:Name="LipsumSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0" />
             </Grid>
-            <Grid x:Name="NaughtyStringsOptionsGrid" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
+            <Grid x:Name="NaughtyStringsOptionsGrid" Visibility="{x:Bind NaughtyStringsOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -80,7 +80,7 @@
                 </ComboBox>
                 <NumberBox x:Name="NaughtyStringsSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647"  NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0" />
             </Grid>
-            <Grid x:Name="RegexOptionsGrid" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
+            <Grid x:Name="RegexOptionsGrid" Visibility="{x:Bind RegexOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -88,7 +88,7 @@
                 <TextBox x:Name="RegexPatternTextBox" Header="Regex Pattern:" Margin="0,0,16,0" />
                 <NumberBox x:Name="RegexSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0" />
             </Grid>
-            <Grid x:Name="WordsOptionsGrid" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
+            <Grid x:Name="WordsOptionsGrid" Visibility="{x:Bind WordsOptionsGridIsVisible.Value, Mode=OneWay}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,16,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
