@@ -35,6 +35,9 @@ namespace WinUI3DevTools.Pages
         public ObservableBoolean TextFunctionsIsEnabled = new() { Value = false };
         public ObservableBoolean WordsOptionsGridIsVisible = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextGeneratorPage"/> class.
+        /// </summary>
         public TextGeneratorPage()
         {
             InitializeComponent();
@@ -126,6 +129,12 @@ namespace WinUI3DevTools.Pages
             }
         }
 
+        /// <summary>
+        /// Generates the lipsum paragraphs asynchronously.
+        /// </summary>
+        /// <param name="paragraphs">The paragraphs.</param>
+        /// <param name="seed">The seed.</param>
+        /// <returns><![CDATA[Task<string>]]></returns>
         private async Task<string> GenerateLipsumAsync(int paragraphs, int seed)
         {
             return await Task.Run(() =>
@@ -228,7 +237,7 @@ namespace WinUI3DevTools.Pages
         }
 
         /// <summary>
-        /// Generates the words asynchronously.
+        /// Generates the lipsum words asynchronously.
         /// </summary>
         /// <param name="min">The min.</param>
         /// <param name="max">The max.</param>
@@ -279,6 +288,11 @@ namespace WinUI3DevTools.Pages
             }
         }
 
+        /// <summary>
+        /// Changes the visibility of specific type options on type selection combo box selection changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
         private void TextTypeSelectionComboBox_SelectionChanged(
             object sender,
             SelectionChangedEventArgs e
@@ -287,6 +301,10 @@ namespace WinUI3DevTools.Pages
             UpdateOptionsGridVisibility((sender as ComboBox).SelectedItem.ToString());
         }
 
+        /// <summary>
+        /// Updates the specific type options grid visibility.
+        /// </summary>
+        /// <param name="textType">The text type.</param>
         private void UpdateOptionsGridVisibility(string textType)
         {
             switch (textType)
