@@ -157,7 +157,7 @@ namespace WinUI3DevTools.Pages
                         Seed = seed
                     };
                 }
-                var generator = RandomDataGenerator.Randomizers.RandomizerFactory.GetRandomizer(
+                var generator = RandomizerFactory.GetRandomizer(
                     lipsumFieldOptions
                 );
                 var outputString = generator
