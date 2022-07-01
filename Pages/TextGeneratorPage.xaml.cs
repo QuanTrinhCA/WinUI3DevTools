@@ -82,6 +82,22 @@ namespace WinUI3DevTools.Pages
                     break;
 
                 case "Words":
+                    if (double.IsNaN(WordsMinNumberBox.Value) || WordsMinNumberBox.Value == 0)
+                    {
+                        WordsMinNumberBox.Value = 1;
+                    }
+                    if (
+                        double.IsNaN(WordsMaxNumberBox.Value)
+                        || WordsMaxNumberBox.Value <= WordsMinNumberBox.Value
+                    )
+                    {
+                        WordsMaxNumberBox.Value = WordsMinNumberBox.Value;
+                    }
+                    OuputTextBox.Text = await GenerateWordsAsync(
+                        (int)WordsMinNumberBox.Value,
+                        (int)WordsMaxNumberBox.Value,
+                        (int)WordsSeedNumberBox.Value
+                    );
                     break;
             }
         }
@@ -180,6 +196,41 @@ namespace WinUI3DevTools.Pages
                     {
                         ValueAsString = true,
                         Pattern = pattern,
+                        Seed = seed
+                    };
+                }
+                return RandomizerFactory.GetRandomizer(lipsumFieldOptions).Generate();
+            });
+        }
+
+        /// <summary>
+        /// Generates the words asynchronously.
+        /// </summary>
+        /// <param name="min">The min.</param>
+        /// <param name="max">The max.</param>
+        /// <param name="seed">The seed.</param>
+        /// <returns><![CDATA[Task<string>]]></returns>
+        private async Task<string> GenerateWordsAsync(int min, int max, int seed)
+        {
+            return await Task.Run(() =>
+            {
+                FieldOptionsTextWords lipsumFieldOptions;
+                if (seed < -2147483647 || seed > 2147483647)
+                {
+                    lipsumFieldOptions = new FieldOptionsTextWords
+                    {
+                        ValueAsString = true,
+                        Min = min,
+                        Max = max
+                    };
+                }
+                else
+                {
+                    lipsumFieldOptions = new FieldOptionsTextWords
+                    {
+                        ValueAsString = true,
+                        Min = min,
+                        Max = max,
                         Seed = seed
                     };
                 }

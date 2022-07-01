@@ -119,9 +119,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <NumberBox Header="Min:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Margin="0,0,16,0"/>
-                <NumberBox Header="Max:" Maximum="150" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
-                <NumberBox Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="2" Margin="0,0,16,0"/>
+                <NumberBox x:Name="WordsMinNumberBox" Header="Min:" Value="1" Maximum="100" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Margin="0,0,16,0"/>
+                <NumberBox x:Name="WordsMaxNumberBox" Header="Max:" Value="10" Maximum="100" Minimum="1" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="1" Margin="0,0,16,0"/>
+                <NumberBox x:Name="WordsSeedNumberBox" Header="Seed:" Maximum="2147483647" Minimum="-2147483647" NumberFormatter="{x:Bind IntergerRoudingFormatter}" Grid.Column="2" Margin="0,0,16,0"/>
             </Grid>
             <TextBox x:Name="OuputTextBox" Header="Output:" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,16,0,0"/>
             <TextBlock Text="Text Generation History"
