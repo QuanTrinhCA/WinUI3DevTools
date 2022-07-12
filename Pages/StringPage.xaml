@@ -1,13 +1,145 @@
 ﻿<Page
     x:Class="WinUI3DevTools.Pages.StringPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WinUI3DevTools.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <TextBlock Text="String" Style="{ThemeResource TitleTextBlockStyle}"/>
+    <Grid x:Name="StringPageMainGrid" Padding="36,24,36,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.ColumnSpan="7"
+            Style="{ThemeResource TitleTextBlockStyle}"
+            Text="String Manipulation" />
+        <TextBox
+            x:Name="InputTextBox"
+            Grid.Row="1"
+            Grid.ColumnSpan="7"
+            Margin="0,16,0,0"
+            HorizontalAlignment="Stretch"
+            AcceptsReturn="True"
+            Header="Input:"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            TextChanged="InputTextBox_TextChanged"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="OutputTextBox"
+            Grid.Row="2"
+            Grid.ColumnSpan="7"
+            Margin="0,16,0,0"
+            HorizontalAlignment="Stretch"
+            AcceptsReturn="True"
+            Header="Output:"
+            IsReadOnly="True"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="0,16,0,16"
+            Text="Length:" />
+        <TextBlock
+            x:Name="LengthTextBox"
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="4,16,0,16"
+            IsTextSelectionEnabled="True"
+            Text="0" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="2"
+            Margin="16,16,0,16"
+            Text="Words:" />
+        <TextBlock
+            x:Name="WordsTextBox"
+            Grid.Row="3"
+            Grid.Column="3"
+            Margin="4,16,0,16"
+            IsTextSelectionEnabled="True"
+            Text="0" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="4"
+            Margin="16,16,0,16"
+            Text="Lines:" />
+        <TextBlock
+            x:Name="LinesTextBox"
+            Grid.Row="3"
+            Grid.Column="5"
+            Margin="4,16,0,16"
+            IsTextSelectionEnabled="True"
+            Text="0" />
+        <CommandBar
+            Grid.Row="3"
+            Grid.Column="6"
+            Margin="16,4,0,4"
+            DefaultLabelPosition="Right"
+            IsDynamicOverflowEnabled="True">
+            <AppBarButton
+                Click="AppBarButton_Click"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="Base64 Encode"
+                Tag="Encode64" />
+            <AppBarButton
+                Click="AppBarButton_Click"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="Base64 Decode"
+                Tag="Decode64" />
+            <AppBarButton
+                Click="AppBarButton_Click"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="UPPERCASE"
+                Tag="Uppercase">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE70E;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton
+                Click="AppBarButton_Click"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="lowercase"
+                Tag="Lowercase">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE70D;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton
+                Click="AppBarButton_Click"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="Capitalize"
+                Tag="Capitalize">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97E;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton
+                Click="AppBarButton_Click"
+                Icon="Delete"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="Clear"
+                Tag="Clear" />
+            <AppBarButton
+                Click="AppBarButton_Click"
+                Icon="Copy"
+                IsEnabled="{x:Bind TextFunctionsIsEnabled.Value, Mode=OneWay}"
+                Label="Copy"
+                Tag="Copy" />
+        </CommandBar>
     </Grid>
 </Page>
