@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.ApplicationModel.DataTransfer;
+using WinUI3DevTools.Classes;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,7 +22,7 @@ namespace WinUI3DevTools.Pages
         /// </summary>
         public GUIDGeneratorPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -32,9 +32,7 @@ namespace WinUI3DevTools.Pages
         /// <param name="e">The e.</param>
         private void CopySingleHistoryButton_Click(object sender, RoutedEventArgs e)
         {
-            DataPackage dataPackage = new() { RequestedOperation = DataPackageOperation.Copy };
-            dataPackage.SetText((sender as AppBarButton).Tag.ToString());
-            Clipboard.SetContent(dataPackage);
+            SystemFunctions.CopyText((sender as AppBarButton).Tag.ToString());
         }
 
         /// <summary>

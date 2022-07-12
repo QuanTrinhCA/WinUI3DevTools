@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WinUI3DevTools.Models
+namespace WinUI3DevTools.Classes
 {
     public class ASCIIItem
     {

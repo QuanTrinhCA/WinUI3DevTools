@@ -1,8 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace WinUI3DevTools.Models
+namespace WinUI3DevTools.Classes
 {
+    /// <summary>
+    /// Custom observable boolean class.
+    /// </summary>
     public class ObservableBoolean : INotifyPropertyChanged
     {
         private bool _value;
@@ -11,10 +14,7 @@ namespace WinUI3DevTools.Models
 
         public bool Value
         {
-            get
-            {
-                return _value;
-            }
+            get => _value;
             set
             {
                 if (value.GetType() != typeof(bool))
@@ -30,12 +30,19 @@ namespace WinUI3DevTools.Models
             }
         }
 
+        /// <summary>
+        /// Raises the property changed event with the name of the property that changed.
+        /// </summary>
+        /// <param name="propertyName">The property name.</param>
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
+    /// <summary>
+    /// Custom observable control size class.
+    /// </summary>
     public class ObservableControlSize : INotifyPropertyChanged
     {
         private double _height;
@@ -46,10 +53,7 @@ namespace WinUI3DevTools.Models
 
         public double Height
         {
-            get
-            {
-                return _height;
-            }
+            get => _height;
             set
             {
                 if (value == 0.0)
@@ -67,10 +71,7 @@ namespace WinUI3DevTools.Models
 
         public double Width
         {
-            get
-            {
-                return _width;
-            }
+            get => _width;
             set
             {
                 if (value == 0.0)
@@ -86,6 +87,10 @@ namespace WinUI3DevTools.Models
             }
         }
 
+        /// <summary>
+        /// Raises the property changed event with the name of the property that changed.
+        /// </summary>
+        /// <param name="propertyName">The property name.</param>
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using WinUI3DevTools.Models;
+using WinUI3DevTools.Classes;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,7 +29,7 @@ namespace WinUI3DevTools.Pages
         /// </summary>
         public HashGeneratorPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace WinUI3DevTools.Pages
             }
             else if (FileInputIsEnabled.Value && InputFileSelectionButton.Tag != null)
             {
-                var buffer = await FileIO.ReadBufferAsync(
+                Windows.Storage.Streams.IBuffer buffer = await FileIO.ReadBufferAsync(
                     InputFileSelectionButton.Tag as StorageFile
                 );
                 inputBytes = buffer.ToArray();
@@ -81,7 +81,7 @@ namespace WinUI3DevTools.Pages
                     break;
             }
             StringBuilder stringBuilder = new();
-            foreach (var outputByte in outputBytes)
+            foreach (byte outputByte in outputBytes)
             {
                 stringBuilder.Append(outputByte.ToString("x2"));
             }
@@ -112,7 +112,7 @@ namespace WinUI3DevTools.Pages
         /// <param name="e">The e.</param>
         private async void InputFileSelectionButton_Click(object sender, RoutedEventArgs e)
         {
-            var file = await OpenFilePicker();
+            StorageFile file = await OpenFilePicker();
             if (file == null)
             {
                 return;
@@ -150,8 +150,8 @@ namespace WinUI3DevTools.Pages
         /// <returns><![CDATA[Task<StorageFile>]]></returns>
         private async Task<StorageFile> OpenFilePicker()
         {
-            var filePicker = new FileOpenPicker();
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+            FileOpenPicker filePicker = new();
+            IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
             WinRT.Interop.InitializeWithWindow.Initialize(filePicker, hwnd);
             filePicker.FileTypeFilter.Add("*");
             return await filePicker.PickSingleFileAsync();

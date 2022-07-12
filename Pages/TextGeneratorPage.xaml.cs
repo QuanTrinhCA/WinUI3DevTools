@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Globalization.NumberFormatting;
-using WinUI3DevTools.Models;
+using WinUI3DevTools.Classes;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -98,7 +98,7 @@ namespace WinUI3DevTools.Pages
                     break;
 
                 case "Text Regex":
-                    if (RegexPatternTextBox.Text == null || RegexPatternTextBox.Text == "")
+                    if (RegexPatternTextBox.Text is null or "")
                     {
                         break;
                     }
@@ -139,28 +139,22 @@ namespace WinUI3DevTools.Pages
         {
             return await Task.Run(() =>
             {
-                FieldOptionsTextLipsum lipsumFieldOptions;
-                if (seed < -2147483647 || seed > 2147483647)
-                {
-                    lipsumFieldOptions = new FieldOptionsTextLipsum
+                FieldOptionsTextLipsum lipsumFieldOptions = seed is < (-2147483647) or > 2147483647
+                    ? new FieldOptionsTextLipsum
                     {
                         ValueAsString = true,
                         Paragraphs = paragraphs
-                    };
-                }
-                else
-                {
-                    lipsumFieldOptions = new FieldOptionsTextLipsum
+                    }
+                    : new FieldOptionsTextLipsum
                     {
                         ValueAsString = true,
                         Paragraphs = paragraphs,
                         Seed = seed
                     };
-                }
-                var generator = RandomizerFactory.GetRandomizer(
+                IRandomizerString generator = RandomizerFactory.GetRandomizer(
                     lipsumFieldOptions
                 );
-                var outputString = generator
+                string outputString = generator
                     .Generate()
                     .Replace(Environment.NewLine, $"{Environment.NewLine}{Environment.NewLine}");
                 outputString = outputString.Insert(
@@ -181,25 +175,19 @@ namespace WinUI3DevTools.Pages
         {
             return await Task.Run(() =>
             {
-                FieldOptionsTextNaughtyStrings lipsumFieldOptions;
-                if (seed < -2147483647 || seed > 2147483647)
-                {
-                    lipsumFieldOptions = new FieldOptionsTextNaughtyStrings
+                FieldOptionsTextNaughtyStrings lipsumFieldOptions = seed is < (-2147483647) or > 2147483647
+                    ? new FieldOptionsTextNaughtyStrings
                     {
                         ValueAsString = true,
                         Categories = category
-                    };
-                }
-                else
-                {
-                    lipsumFieldOptions = new FieldOptionsTextNaughtyStrings
+                    }
+                    : new FieldOptionsTextNaughtyStrings
                     {
                         ValueAsString = true,
                         Categories = category,
                         Seed = seed
                     };
-                }
-                var generator = RandomizerFactory.GetRandomizer(lipsumFieldOptions);
+                IRandomizerString generator = RandomizerFactory.GetRandomizer(lipsumFieldOptions);
                 return generator.Generate();
             });
         }
@@ -214,24 +202,18 @@ namespace WinUI3DevTools.Pages
         {
             return await Task.Run(() =>
             {
-                FieldOptionsTextRegex lipsumFieldOptions;
-                if (seed < -2147483647 || seed > 2147483647)
-                {
-                    lipsumFieldOptions = new FieldOptionsTextRegex
+                FieldOptionsTextRegex lipsumFieldOptions = seed is < (-2147483647) or > 2147483647
+                    ? new FieldOptionsTextRegex
                     {
                         ValueAsString = true,
                         Pattern = pattern
-                    };
-                }
-                else
-                {
-                    lipsumFieldOptions = new FieldOptionsTextRegex
+                    }
+                    : new FieldOptionsTextRegex
                     {
                         ValueAsString = true,
                         Pattern = pattern,
                         Seed = seed
                     };
-                }
                 return RandomizerFactory.GetRandomizer(lipsumFieldOptions).Generate();
             });
         }
@@ -247,26 +229,20 @@ namespace WinUI3DevTools.Pages
         {
             return await Task.Run(() =>
             {
-                FieldOptionsTextWords lipsumFieldOptions;
-                if (seed < -2147483647 || seed > 2147483647)
-                {
-                    lipsumFieldOptions = new FieldOptionsTextWords
+                FieldOptionsTextWords lipsumFieldOptions = seed is < (-2147483647) or > 2147483647
+                    ? new FieldOptionsTextWords
                     {
                         ValueAsString = true,
                         Min = min,
                         Max = max
-                    };
-                }
-                else
-                {
-                    lipsumFieldOptions = new FieldOptionsTextWords
+                    }
+                    : new FieldOptionsTextWords
                     {
                         ValueAsString = true,
                         Min = min,
                         Max = max,
                         Seed = seed
                     };
-                }
                 return RandomizerFactory.GetRandomizer(lipsumFieldOptions).Generate();
             });
         }
@@ -278,14 +254,7 @@ namespace WinUI3DevTools.Pages
         /// <param name="e">The e.</param>
         private void OuputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace((sender as TextBox).Text))
-            {
-                TextFunctionsIsEnabled.Value = false;
-            }
-            else
-            {
-                TextFunctionsIsEnabled.Value = true;
-            }
+            TextFunctionsIsEnabled.Value = !string.IsNullOrWhiteSpace((sender as TextBox).Text);
         }
 
         /// <summary>

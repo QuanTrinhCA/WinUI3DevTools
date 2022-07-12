@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using WinUI3DevTools.Models;
+using WinUI3DevTools.Classes;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,9 +24,9 @@ namespace WinUI3DevTools.Pages
         /// </summary>
         public ASCIIPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.SizeChanged += ASCIIPage_SizeChanged;
+            SizeChanged += ASCIIPage_SizeChanged;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace WinUI3DevTools.Pages
         /// <param name="e">The e.</param>
         private void ASCIIPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ExpanderSize.Width = this.ASCIIPageMainGrid.ActualWidth / 2;
+            ExpanderSize.Width = ASCIIPageMainGrid.ActualWidth / 2;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace WinUI3DevTools.Pages
         /// <param name="e">The e.</param>
         private void ASCIIPageMainGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            ExpanderSize.Width = this.ASCIIPageMainGrid.ActualWidth / 2;
+            ExpanderSize.Width = ASCIIPageMainGrid.ActualWidth / 2;
         }
 
         /// <summary>
