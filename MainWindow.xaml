@@ -28,7 +28,7 @@
                     <FontIcon Glyph="&#xE82D;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Content="Ping" Tag="PingPage">
+            <NavigationViewItem Content="Ping" Tag="NetworkPage">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE968;"/>
                 </NavigationViewItem.Icon>

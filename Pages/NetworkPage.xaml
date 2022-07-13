@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="WinUI3DevTools.Pages.PingPage"
+    x:Class="WinUI3DevTools.Pages.NetworkPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinUI3DevTools.Pages"
@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="PingPageMainGrid"
+    <Grid x:Name="NetworkPageMainGrid"
           Padding="36,24,36,0">
-        <TextBlock Text="Ping" Style="{ThemeResource TitleTextBlockStyle}"/>
+        <TextBlock Text="Network" Style="{ThemeResource TitleTextBlockStyle}"/>
     </Grid>
 </Page>

@@ -18,7 +18,7 @@
     <None Remove="Pages\GUIDGeneratorPage.xaml" />
     <None Remove="Pages\HashGeneratorPage.xaml" />
     <None Remove="Pages\IconsPage.xaml" />
-    <None Remove="Pages\PingPage.xaml" />
+    <None Remove="Pages\NetworkPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\StringPage.xaml" />
     <None Remove="Pages\TextGeneratorPage.xaml" />
@@ -53,7 +53,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\PingPage.xaml">
+    <Page Update="Pages\NetworkPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
